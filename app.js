@@ -58,6 +58,7 @@ function agregarAmigo() {
     }
 }
 
+// Funcion actualizar la lista de  amigos
 function actualizarListaAmigos(nombreAmigo) {
     const elemento = document.createElement('li');
     elemento.textContent = nombreAmigo;
