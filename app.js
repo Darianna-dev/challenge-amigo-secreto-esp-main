@@ -1,6 +1,7 @@
 // El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación. Aquí deberás desarrollar la lógica para resolver el problema.
 
 const listaAmigos = document.querySelector("#listaAmigos");
+const amigoElegido = document.getElementById("resultado");
 const input = document.querySelector("#amigo");
 const amigos = [];
 
@@ -12,14 +13,15 @@ const regex =
 function limpiarInput() {
     input.value = "";
     input.focus();
+    amigoElegido.innerHTML = "";
 }
 
-// al presionar Enter llama a funcion agregarAmigo
-input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-        agregarAmigo();
-    }
-});
+// // al presionar Enter llama a funcion agregarAmigo
+// input.addEventListener("keydown", (event) => {
+//     if (event.key === "Enter") {
+//         agregarAmigo();
+//     }
+// });
 
 // Se valida si el input tiene un valor y si cumple con la expresión regular
 function validarNombre(nombre) {
@@ -46,6 +48,7 @@ function agregarAmigo() {
             } else {
                 amigos.push(nombre);
                 console.log(amigos);
+                // amigoElegido.innerHTML = "";
                 actualizarListaAmigos(nombre);
             }
         } else {
@@ -58,9 +61,38 @@ function agregarAmigo() {
     }
 }
 
+// al presionar Enter llama a funcion agregarAmigo
+input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        agregarAmigo();
+    }
+});
+
 function actualizarListaAmigos(nombreAmigo) {
-    const elemento = document.createElement("li");
-    elemento.textContent = nombreAmigo;
-    listaAmigos.appendChild(elemento);
-    limpiarInput();
+    if (amigos.length > 0) {
+        amigos.forEach((amigo) => {
+            const elemento = document.createElement("li");
+            elemento.textContent = nombreAmigo;
+            listaAmigos.appendChild(elemento);
+            limpiarInput();
+        });
+    }
+}
+
+function sortearAmigo() {
+    try {
+        if (amigos.length > 0) {
+            let amigoSorteado =
+                amigos[Math.floor(Math.random() * amigos.length)];
+            console.log(amigoSorteado);
+            limpiarInput();
+            listaAmigos.replaceChildren();
+            // const amigoElegido = document.getElementById("resultado");
+            amigoElegido.innerHTML = `${amigoSorteado}`;
+        } else {
+            alert("No hay amigos en la lista de amigos para sortear");
+        }
+    } catch (error) {
+        console.error("Error al sortear amigo:", error);
+    }
 }
