@@ -41,22 +41,17 @@ function agregarAmigo() {
         // Si el nombre es válido, agregar el amigo a la lista
         if (nombreAmigo) {
             if (amigos.includes(nombre)) {
-                alert("El amigo ya se encuentra en la lista");
+                alert("El persona ya se encuentra en la lista");
                 limpiarInput();
             } else {
                 amigos.push(nombre);
                 console.log(amigos);
                 actualizarListaAmigos(nombre);
-                // let elemento = document.createElement("li");
-                // elemento.textContent = nombre;
-                // listaAmigos.appendChild(elemento);
-                // limpiarInput();
             }
         } else {
             // Si el nombre no es válido, mostrar un mensaje de error
             alert("Nombre inválido");
             limpiarInput();
-            // input.focus();
         }
     } catch (error) {
         console.error("Error al agregar amigo:", error);
