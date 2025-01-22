@@ -70,9 +70,10 @@ input.addEventListener("keydown", (event) => {
 
 function actualizarListaAmigos(nombreAmigo) {
     if (amigos.length > 0) {
+        listaAmigos.replaceChildren();
         amigos.forEach((amigo) => {
             const elemento = document.createElement("li");
-            elemento.textContent = nombreAmigo;
+            elemento.textContent = amigo;
             listaAmigos.appendChild(elemento);
             limpiarInput();
         });
