@@ -52,6 +52,7 @@ function agregarAmigo() {
         if (nombreAmigo) {
             if (amigos.includes(nombre)) {
                 alert("El persona ya se encuentra en la lista");
+                actualizarListaAmigos();
                 limpiarInput();
             } else {
                 amigos.push(nombre);
@@ -62,6 +63,7 @@ function agregarAmigo() {
         } else {
             // Si el nombre no es válido, mostrar un mensaje de error
             alert("Nombre inválido");
+            actualizarListaAmigos();
             limpiarInput();
         }
     } catch (error) {
@@ -94,7 +96,6 @@ function actualizarListaAmigos() {
                 // eliminar el amigo de la lista amigos
                 amigos = amigos.filter((amigo) => amigo !== nombreEliminar);
                 eliminarAmigo.remove();
-
                 limpiarInput();
             });
             limpiarInput();
