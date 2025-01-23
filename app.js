@@ -3,11 +3,15 @@
 const listaAmigos = document.querySelector("#listaAmigos");
 const amigoElegido = document.getElementById("resultado");
 const input = document.querySelector("#amigo");
-const amigos = [];
+
+let amigos = [];
 
 // Expresión Regular para validar el nombre del amigo sin espacios y mímino 3 caracteres
+// const regex1 =
+//     /^(?!\s*$)[A-Za-zÁÉÍÓÚáéíóúñÑüÜ]{3,}(\s[A-Za-zÁÉÍÓÚáéíóúñÑüÜ]+)*$/;
+
 const regex =
-    /^(?!\s*$)[A-Za-zÁÉÍÓÚáéíóúñÑüÜ]{3,}(\s[A-Za-zÁÉÍÓÚáéíóúñÑüÜ]+)*$/;
+    /^(?!\s*$)[A-Za-zÁÉÍÓÚáéíóúñÑüÜ]{3,40}(\s[A-Za-zÁÉÍÓÚáéíóúñÑüÜ]{1,37}){0,39}$/;
 
 // Función para limpiar el input
 function limpiarInput() {
@@ -16,15 +20,13 @@ function limpiarInput() {
     amigoElegido.innerHTML = "";
 }
 
-// // al presionar Enter llama a funcion agregarAmigo
-// input.addEventListener("keydown", (event) => {
-//     if (event.key === "Enter") {
-//         agregarAmigo();
-//     }
-// });
-
 // Se valida si el input tiene un valor y si cumple con la expresión regular
 function validarNombre(nombre) {
+    if (nombre.trim().length > 40) {
+        alert("El nombre debe tener entre 3 y 40 caracteres");
+        return false;
+    }
+
     if (regex.test(nombre)) {
         // console.log('Nombre válido');
         return true;
@@ -33,6 +35,12 @@ function validarNombre(nombre) {
         limpiarInput();
         return false;
     }
+}
+
+function crearElementoHTML(elemento, contenido) {
+    const elementoHTML = document.createElement(elemento);
+    elementoHTML.textContent = contenido;
+    return elementoHTML;
 }
 
 // Funcionalidad Agtregar Amigo
@@ -49,7 +57,7 @@ function agregarAmigo() {
                 amigos.push(nombre);
                 console.log(amigos);
                 // amigoElegido.innerHTML = "";
-                actualizarListaAmigos(nombre);
+                actualizarListaAmigos();
             }
         } else {
             // Si el nombre no es válido, mostrar un mensaje de error
@@ -68,13 +76,27 @@ input.addEventListener("keydown", (event) => {
     }
 });
 
-function actualizarListaAmigos(nombreAmigo) {
+function actualizarListaAmigos() {
     if (amigos.length > 0) {
         listaAmigos.replaceChildren();
         amigos.forEach((amigo) => {
-            const elemento = document.createElement("li");
-            elemento.textContent = amigo;
-            listaAmigos.appendChild(elemento);
+            let li = crearElementoHTML("li", amigo);
+            li.classList.add("listado");
+            listaAmigos.appendChild(li);
+            // boton eliminar un amigo
+            let btnEliminar = crearElementoHTML("button", "X");
+            btnEliminar.classList.add("btn-eliminarAmigo");
+            li.appendChild(btnEliminar);
+            // se crea una escucha al evento 'click'para eliminar un amigo
+            btnEliminar.addEventListener("click", function () {
+                const eliminarAmigo = btnEliminar.parentElement;
+                const nombreEliminar = eliminarAmigo.firstChild.textContent;
+                // eliminar el amigo de la lista amigos
+                amigos = amigos.filter((amigo) => amigo !== nombreEliminar);
+                eliminarAmigo.remove();
+
+                limpiarInput();
+            });
             limpiarInput();
         });
     }
