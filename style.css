@@ -94,6 +94,7 @@ body {
     width: 300px;
     display: flex;
     justify-content: center;
+    gap: 20px;
 }
 
 /* Estilos de entrada de texto */
@@ -166,7 +167,7 @@ ul {
 .button-draw:hover {
     background-color: var(--color-button-hover);
     transform: scale(1.05);
-    transition: ease 0.5s all;
+    transition: ease 0.3s all;
 }
 
 /*  ********************************************************  */
@@ -207,10 +208,20 @@ ul {
     transition: ease 0.3s all;
 }
 
+.button-clean {
+    background: #aaa;
+    color: var(--color-text);
+}
+
+.button-clean:hover {
+    color: var(--color-white);
+    background-color: var(--color-button-hover);
+    transition: ease 0.3s all;
+}
+
 .limpiar {
     width: 40px;
     height: 40px;
-    color: var(--color-white);
     font-weight: 900;
     /* filter: invert(84%) sepia(95%) saturate(5399%) hue-rotate(181deg)
         brightness(117%) contrast(100%); */

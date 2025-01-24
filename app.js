@@ -123,3 +123,9 @@ function sortearAmigo() {
 }
 
 //! Añadir Boton Limpiar
+
+function limpiarLista() {
+    listaAmigos.replaceChildren();
+    amigos = [];
+    limpiarInput();
+}
