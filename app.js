@@ -3,6 +3,7 @@
 const listaAmigos = document.querySelector("#listaAmigos");
 const amigoElegido = document.getElementById("resultado");
 const input = document.querySelector("#amigo");
+const btnContainerSotearAmigo = document.querySelector(".button-container");
 
 let amigos = [];
 
@@ -120,3 +121,5 @@ function sortearAmigo() {
         console.error("Error al sortear amigo:", error);
     }
 }
+
+//! Añadir Boton Limpiar

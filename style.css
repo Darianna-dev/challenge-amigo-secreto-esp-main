@@ -92,6 +92,7 @@ body {
 
 .button-container {
     width: 300px;
+    display: flex;
     justify-content: center;
 }
 
@@ -189,7 +190,6 @@ ul {
     margin: 1px auto;
     width: 50px;
     height: 25px;
-    /* background: var(--color-primary); */
     background: var(--color-button);
     justify-items: center;
     align-items: center;
@@ -205,4 +205,13 @@ ul {
     background-color: var(--color-button-hover);
     transform: scale(1.1);
     transition: ease 0.3s all;
+}
+
+.limpiar {
+    width: 40px;
+    height: 40px;
+    color: var(--color-white);
+    font-weight: 900;
+    /* filter: invert(84%) sepia(95%) saturate(5399%) hue-rotate(181deg)
+        brightness(117%) contrast(100%); */
 }
