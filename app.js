@@ -7,12 +7,7 @@ const btnContainerSotearAmigo = document.querySelector(".button-container");
 
 let amigos = [];
 
-// Expresión Regular para validar el nombre del amigo sin espacios y mímino 3 caracteres
-// const regex1 =
-//     /^(?!\s*$)[A-Za-zÁÉÍÓÚáéíóúñÑüÜ]{3,}(\s[A-Za-zÁÉÍÓÚáéíóúñÑüÜ]+)*$/;
-
-const regex =
-    /^(?!\s*$)[A-Za-zÁÉÍÓÚáéíóúñÑüÜ]{3,40}(\s[A-Za-zÁÉÍÓÚáéíóúñÑüÜ]{1,37}){0,39}$/;
+const regex = /^(?!\s*$)[A-Za-zÁÉÍÓÚáéíóúñÑüÜ]{3,40}(\s[A-Za-zÁÉÍÓÚáéíóúñÑüÜ]{1,37}){0,39}$/;
 
 // Función para limpiar el input
 function limpiarInput() {
@@ -38,13 +33,28 @@ function validarNombre(nombre) {
     }
 }
 
-function crearElementoHTML(elemento, contenido) {
+// al presionar Enter llama a funcion agregarAmigo
+input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        agregarAmigo();
+    }
+});
+
+function crearElementoHTML(tag, clase, contenido) {
+    const elementoHTML = document.createElement(tag);
+    elementoHTML.textContent = contenido;
+    elementoHTML.classList.add(clase);
+
+    return elementoHTML;
+}
+
+function crearElementoHTML001(elemento, contenido) {
     const elementoHTML = document.createElement(elemento);
     elementoHTML.textContent = contenido;
     return elementoHTML;
 }
 
-// Funcionalidad Agtregar Amigo
+// Funcionalidad Agregar Amigo
 function agregarAmigo() {
     try {
         let nombre = input.value.trim().toUpperCase();
@@ -52,13 +62,12 @@ function agregarAmigo() {
         // Si el nombre es válido, agregar el amigo a la lista
         if (nombreAmigo) {
             if (amigos.includes(nombre)) {
-                alert("El persona ya se encuentra en la lista");
+                alert("La persona ya se encuentra en la lista");
                 actualizarListaAmigos();
                 limpiarInput();
             } else {
                 amigos.push(nombre);
                 console.log(amigos);
-                // amigoElegido.innerHTML = "";
                 actualizarListaAmigos();
             }
         } else {
@@ -72,29 +81,20 @@ function agregarAmigo() {
     }
 }
 
-// al presionar Enter llama a funcion agregarAmigo
-input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-        agregarAmigo();
-    }
-});
-
 function actualizarListaAmigos() {
     if (amigos.length > 0) {
         listaAmigos.replaceChildren();
         amigos.forEach((amigo) => {
-            let li = crearElementoHTML("li", amigo);
-            li.classList.add("listado");
+            let li = crearElementoHTML("li", "listado", amigo);
             listaAmigos.appendChild(li);
             // boton eliminar un amigo
-            let btnEliminar = crearElementoHTML("button", "X");
-            btnEliminar.classList.add("btn-eliminarAmigo");
+            let btnEliminar = crearElementoHTML("button", "btn-eliminarAmigo", "X");
             li.appendChild(btnEliminar);
             // se crea una escucha al evento 'click'para eliminar un amigo
             btnEliminar.addEventListener("click", function () {
                 const eliminarAmigo = btnEliminar.parentElement;
-                const nombreEliminar = eliminarAmigo.firstChild.textContent;
-                // eliminar el amigo de la lista amigos
+                const nombreEliminar = eliminarAmigo.firstChild.textContent.trim();
+                // eliminar el amigo de la lista amigos del DOM
                 amigos = amigos.filter((amigo) => amigo !== nombreEliminar);
                 eliminarAmigo.remove();
                 limpiarInput();
@@ -107,8 +107,7 @@ function actualizarListaAmigos() {
 function sortearAmigo() {
     try {
         if (amigos.length > 0) {
-            let amigoSorteado =
-                amigos[Math.floor(Math.random() * amigos.length)];
+            let amigoSorteado = amigos[Math.floor(Math.random() * amigos.length)];
             console.log(amigoSorteado);
             limpiarInput();
             listaAmigos.replaceChildren();
@@ -122,7 +121,7 @@ function sortearAmigo() {
     }
 }
 
-//! Añadir Boton Limpiar
+//! Función Boton Limpiar
 
 function limpiarLista() {
     listaAmigos.replaceChildren();
