@@ -17,10 +17,7 @@
         <main class="main-content">
             <header class="header-banner">
                 <h1 class="main-title">Amigo Secreto</h1>
-                <img
-                    src="assets/amigo-secreto.png"
-                    alt="Imagen representativa de amigo secreto"
-                />
+                <img src="assets/amigo-secreto.png" alt="Imagen representativa de amigo secreto" />
             </header>
 
             <section class="input-section">
@@ -32,10 +29,9 @@
                         class="input-name"
                         placeholder="Escribe un nombre"
                         autocomplete="off"
+                        autofocus
                     />
-                    <button class="button-add" onclick="agregarAmigo()">
-                        Añadir
-                    </button>
+                    <button class="button-add" onclick="agregarAmigo()">Añadir</button>
                 </div>
 
                 <ul
@@ -45,18 +41,24 @@
                     role="list"
                 ></ul>
                 <ul id="resultado" class="result-list" aria-live="polite"></ul>
-
+                <!-- *************************** Boton sortear Amigo *************************** -->
                 <div class="button-container">
                     <button
                         class="button-draw"
                         onclick="sortearAmigo()"
                         aria-label="Sortear amigo secreto"
                     >
-                        <img
-                            src="assets/play_circle_outline.png"
-                            alt="Ícono para sortear"
-                        />
+                        <img src="assets/play_circle_outline.png" alt="Ícono para sortear" />
                         Sortear amigo
+                    </button>
+                    <!-- ***************************  Boton Limpiar **************************  -->
+                    <button
+                        class="button-draw button-clean"
+                        onclick="limpiarLista()"
+                        aria-label="Sortear amigo secreto"
+                    >
+                        <img class="limpiar" src="assets/delete.png" alt="Ícono para sortear" />
+                        Limpiar
                     </button>
                 </div>
             </section>
