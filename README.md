@@ -6,7 +6,7 @@ El usuario deberá agregar nombres mediante un campo de texto y un botón "Adici
 
 ---
 
-## Fucionalidades:
+## Funcionalidades:
 
 -   **_Agregar nombres:_** Los usuarios escribirán el nombre de un amigo en un campo de texto y lo agregarán a una lista visible al hacer clic en **_"Añadir"_**.
 <p align="center">
